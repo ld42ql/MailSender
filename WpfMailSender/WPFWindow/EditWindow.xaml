@@ -1,0 +1,29 @@
+﻿<Window x:Class="WpfMailSender.WPFWindow.EditWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+         WindowStartupLocation="CenterScreen" 
+        Title="Редактирование" Height="320"  Width="300"  >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <StackPanel x:Name="EmployeePanel" DataContext="{Binding}" Grid.Row="0" Margin="15" Grid.RowSpan="2" >
+            <TextBlock Text="E-mail" Margin="5"/>
+            <TextBox Margin="5, 0" Text="{Binding EmailUser}"/>
+
+            <TextBlock Text="Password" Margin="5"/>
+            <PasswordBox Margin="5, 0" DataContext="{Binding PasswordUser}"/>
+
+            <TextBlock Text="SMTP-сервер" Margin="5"/>
+            <TextBox Margin="5, 0" Text="{Binding SmtpAddres}"/>
+
+            <TextBox Margin="5, 0" Width="50" HorizontalAlignment="Left" Text="{Binding SmtpPort}"/>
+
+        </StackPanel>
+        <Button x:Name="ApplyBtn" Content="Сохранить" Grid.Row="1" Visibility="Visible"></Button>
+    </Grid>
+</Window>
