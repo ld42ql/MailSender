@@ -21,9 +21,14 @@ namespace WpfMailSender
             SmtpPort = 25
         };
 
-        public static List<string> TestAddresMail() => new List<string> { "ld42ql@gmail.com", "ld42ql@icloud.com", "ld42ql@hotmail.com" };
+        public static List<string> TestAddresMail() => new List<string>
+        {
+            "ld42ql@gmail.com",
+            "ld42ql@icloud.com",
+            "ld42ql@hotmail.com"
+        };
 
-        public static TextMail TestMail = new TextMail()
+        public static TextMail TestTextMail = new TextMail()
         {
             Subject = "Тестовое сообщение",
             Body = "Привет.\nЭто тестовое сообщение, отвечать на него не надо :)"

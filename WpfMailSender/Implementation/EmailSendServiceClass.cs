@@ -14,8 +14,11 @@ namespace WpfMailSender
     /// </summary>
     public class EmailSendServiceClass
     {
+        private string messadgeStatus = String.Empty;
 
-        public string SendMessadge(UsersData user, List<string> listStrMails, TextMail text)
+        public string MessadgeStatus { get => messadgeStatus; }
+
+        public void SendMessadge(UsersData user, List<string> listStrMails, TextMail text)
         {
             foreach (var item in listStrMails)
             {
@@ -31,16 +34,17 @@ namespace WpfMailSender
                         try
                         {
                             sc.Send(mailMessage);
+                            this.messadgeStatus += $"Сообщение отправленно по адресу {item}\n";
                         }
                         catch
                         {
-                            return "Произошла ошибка";
+                            this.messadgeStatus += $"Сообщение не отправленно по адресу {item}\n";
+                            continue;
                         }
                     }
                 }
             }
-            return "Сообщение отправленно";
+            
         }
-
     }
 }

@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfMailSender.Test;
+using WpfMailSender.WPFWindow;
 
 namespace WpfMailSender
 {
@@ -20,9 +22,29 @@ namespace WpfMailSender
     /// </summary>
     public partial class MainWindow : Window
     {
+       private EmailSendServiceClass emailSend = new EmailSendServiceClass();
+
         public MainWindow()
         {
             InitializeComponent();
+
+            ApplyBtn.Click +=
+                delegate
+                {
+                    emailSend.SendMessadge(TestInMemory.TestUser, TestInMemory.TestAddresMail(), TestInMemory.TestTextMail);
+                    StatList.DataContext = emailSend.MessadgeStatus;
+                };
+
+            EditBtn.Click +=
+                delegate
+                {
+                    new EditWindow(TestInMemory.TestUser).ShowDialog();
+                };
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            SelectUserPanel.DataContext = TestInMemory.TestUser;
         }
     }
 }

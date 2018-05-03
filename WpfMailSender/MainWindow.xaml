@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfMailSender"
         mc:Ignorable="d" 
-        Title="Рассыльщик" MinHeight="280"  MinWidth="300" Height="450" Width="800"  >
+        Title="Рассыльщик" Loaded="Window_Loaded" MinHeight="280"  MinWidth="300" Height="450" Width="800"  >
     <Grid Background="Gray">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="5"/>
@@ -36,16 +36,16 @@
                             <RowDefinition Height="70"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0">
+                        <StackPanel Grid.Row="0" x:Name="SelectUserPanel" DataContext="{Binding}">
                             <ToolBarTray HorizontalAlignment="Stretch" Background="#FF97999B" >
                                 <ToolBar HorizontalAlignment="Left">
-                                    <ComboBox Text="Выбор отправителя" Width="250"/>
+                                    <TextBox Text="{Binding EmailUser}" Width="250"/>
                                     <Separator/>
-                                    <Button Content="Добавить"/>
+                                    <Button Content="Применить" x:Name="ApplyBtn"/>
                                     <Separator/>
-                                    <Button Content="Редактировать"/>
+                                    <Button Content="Редактировать" x:Name="EditBtn"/>
                                     <Separator/>
-                                    <Button Content="Удалить"/>
+                                    <Button Content="Удалить" x:Name="DeleteBtn"/>
                                 </ToolBar>
                                 <ToolBar HorizontalAlignment="Right">
                                     <TextBlock Text="Планировщик" Width="100" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
@@ -117,7 +117,7 @@
                 </StackPanel>
             </TabItem>
             <TabItem Header="Статистика">
-                <ListBox></ListBox>
+                <ListBox x:Name="StatList" DataContext="{Binding}"></ListBox>
             </TabItem>
         </TabControl>
 

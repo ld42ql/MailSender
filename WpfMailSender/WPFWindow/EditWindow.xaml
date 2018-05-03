@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
          WindowStartupLocation="CenterScreen" 
-        Title="Редактирование" Height="320"  Width="300"  >
+        Title="Редактирование" Height="300"  Width="300"  >
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -19,10 +19,10 @@
             <PasswordBox Margin="5, 0" DataContext="{Binding PasswordUser}"/>
 
             <TextBlock Text="SMTP-сервер" Margin="5"/>
-            <TextBox Margin="5, 0" Text="{Binding SmtpAddres}"/>
-
-            <TextBox Margin="5, 0" Width="50" HorizontalAlignment="Left" Text="{Binding SmtpPort}"/>
-
+            <DockPanel Margin="5, 0">
+            <TextBox  Width="187" Text="{Binding SmtpAddres}"/>
+            <TextBox Margin="5, 0" Width="50" Text="{Binding SmtpPort}"/>
+            </DockPanel>
         </StackPanel>
         <Button x:Name="ApplyBtn" Content="Сохранить" Grid.Row="1" Visibility="Visible"></Button>
     </Grid>
