@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Net.Mail;
 using WpfMailSender.Test.Models;
+using System.Collections.ObjectModel;
 
 namespace WpfMailSender
 {
@@ -14,12 +15,12 @@ namespace WpfMailSender
     /// </summary>
     public class EmailSendServiceClass
     {
-        private string messadgeStatus = String.Empty;
-
-        public string MessadgeStatus { get => messadgeStatus; }
-
+        public ObservableCollection<StatusMessadge> messadgeStatus;
+        
         public void SendMessadge(UsersData user, List<string> listStrMails, TextMail text)
         {
+            messadgeStatus = new ObservableCollection<StatusMessadge>();
+
             foreach (var item in listStrMails)
             {
                 using (MailMessage mailMessage = new MailMessage(user.EmailUser, item))
@@ -34,11 +35,23 @@ namespace WpfMailSender
                         try
                         {
                             sc.Send(mailMessage);
-                            this.messadgeStatus += $"Сообщение отправленно по адресу {item}\n";
+                            messadgeStatus.Add(new StatusMessadge
+                            {
+                                Status = "Отправленно",
+                                Email = item,
+                                Date = DateTime.Now
+                            }
+                                );
                         }
                         catch
                         {
-                            this.messadgeStatus += $"Сообщение не отправленно по адресу {item}\n";
+                            messadgeStatus.Add(new StatusMessadge
+                            {
+                                Status = "Не отправленно",
+                                Email = item,
+                                Date = DateTime.Now
+                            }
+                                  );
                             continue;
                         }
                     }

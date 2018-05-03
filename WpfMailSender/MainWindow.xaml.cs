@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,7 +33,7 @@ namespace WpfMailSender
                 delegate
                 {
                     emailSend.SendMessadge(TestInMemory.TestUser, TestInMemory.TestAddresMail(), TestInMemory.TestTextMail);
-                    StatList.DataContext = emailSend.MessadgeStatus;
+                    Statistics();
                 };
 
             EditBtn.Click +=
@@ -42,9 +43,22 @@ namespace WpfMailSender
                 };
         }
 
+
+
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             SelectUserPanel.DataContext = TestInMemory.TestUser;
+            Statistics();
+        }
+
+        private void Statistics()
+        {
+            StatList.DataContext = emailSend.messadgeStatus;
+        }
+
+        private void StatisticsLoaded(object sender, RoutedEventArgs e)
+        {
+            Statistics();
         }
     }
 }

@@ -116,8 +116,16 @@
                              SpellCheck.IsEnabled="True" Language="ru-ru" Height="273"/>
                 </StackPanel>
             </TabItem>
-            <TabItem Header="Статистика">
-                <ListBox x:Name="StatList" DataContext="{Binding}"></ListBox>
+            <TabItem Header="Статистика" Loaded ="StatisticsLoaded">
+                <ListView x:Name="StatList" ItemsSource="{Binding}">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Адрес почты" Width="300"  DisplayMemberBinding="{Binding Email}"/>
+                            <GridViewColumn Header="Результат" Width="100"  DisplayMemberBinding="{Binding Status}"/>
+                            <GridViewColumn Header="Время" Width="150"  DisplayMemberBinding="{Binding Date}"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
             </TabItem>
         </TabControl>
 

@@ -66,6 +66,7 @@
     <Compile Include="Implementation\EmailSendServiceClass.cs" />
     <Compile Include="Implementation\SchedulerClass.cs" />
     <Compile Include="SQL\DBClass.cs" />
+    <Compile Include="Test\Models\StatusMessadge.cs" />
     <Compile Include="Test\Models\TextMail.cs" />
     <Compile Include="Test\Models\UsersData.cs" />
     <Compile Include="Test\TestInMemory.cs" />
