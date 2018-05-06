@@ -13,7 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using WpfMailSender.Test;
+using WpfMailSender.Implementation.Models;
+using WpfMailSender.SQL;
 using WpfMailSender.WPFWindow;
 
 namespace WpfMailSender
@@ -23,23 +24,33 @@ namespace WpfMailSender
     /// </summary>
     public partial class MainWindow : Window
     {
-       private EmailSendServiceClass emailSend = new EmailSendServiceClass();
+        private EmailSendServiceClass emailSend;
+        DBClass db;
 
         public MainWindow()
         {
             InitializeComponent();
 
-            ApplyBtn.Click +=
+            
+            db = new DBClass();
+
+            btnSendderNow.Click +=
                 delegate
                 {
-                    emailSend.SendMessadge(TestInMemory.TestUser, TestInMemory.TestAddresMail(), TestInMemory.TestTextMail);
-                    Statistics();
+                    emailSend = new EmailSendServiceClass(boxUserSender.Text, boxUserSender.SelectedValue.ToString());
+                    emailSend.SendMails(db.Emails);
                 };
 
-            EditBtn.Click +=
+            btnEditSender.Click +=
                 delegate
                 {
-                    new EditWindow(TestInMemory.TestUser).ShowDialog();
+                    //new EditWindow(TestInMemory.TestUser).ShowDialog();
+                };
+
+            winClose.Click +=
+                delegate
+                {
+                    this.Close();
                 };
         }
 
@@ -47,13 +58,13 @@ namespace WpfMailSender
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            SelectUserPanel.DataContext = TestInMemory.TestUser;
-            Statistics();
+            boxUserSender.ItemsSource = VariablesClass.Senders;
+            boxAddressees.ItemsSource = db.Emails;
         }
 
         private void Statistics()
         {
-            StatList.DataContext = emailSend.messadgeStatus;
+            StatList.DataContext = db.Emails;
         }
 
         private void StatisticsLoaded(object sender, RoutedEventArgs e)

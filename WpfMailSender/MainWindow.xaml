@@ -4,8 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfMailSender"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d" 
-        Title="Рассыльщик" Loaded="Window_Loaded" MinHeight="280"  MinWidth="300" Height="450" Width="800"  >
+        Title="Рассыльщик" Loaded="Window_Loaded" MinHeight="280"  MinWidth="300" Height="450" Width="800" Icon="Resourse/Images/Letter.png"  >
     <Grid Background="Gray">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="5"/>
@@ -17,18 +18,13 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="5"/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" Grid.ColumnSpan="3" Orientation="Horizontal">
-
-            <Button Content="Файл" Width="70"  Margin="10,0,0,0" BorderThickness="0" Background="Gray"/>
-            <Button Content="Помощь" Width="70"  Margin="10,0,0,0" BorderThickness="0" Background="Gray"/>
-        </StackPanel>
-        <TabControl Grid.Column="1" Grid.Row="1">
-            <TabControl.Background>
-                <RadialGradientBrush GradientOrigin="0,0" RadiusY="0.8" RadiusX="0.8">
-                    <GradientStop Color="#FF222222" Offset="1"/>
-                    <GradientStop Color="#FF4E4E4C" Offset="0.553"/>
-                </RadialGradientBrush>
-            </TabControl.Background>
+        <Menu Grid.Row="0" Grid.ColumnSpan="3">
+            <MenuItem Header="Файл" Height="25" Margin="10,0,0,0">
+                <MenuItem  Header="Закрыть" x:Name="winClose"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="Помощь" Margin="10,0,0,0"/>
+        </Menu>
+        <TabControl Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <TabItem Header="Формирование группы рассылки" HorizontalAlignment="Right">
                 <TabItem.Content>
                     <Grid>
@@ -36,24 +32,24 @@
                             <RowDefinition Height="70"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" x:Name="SelectUserPanel" DataContext="{Binding}">
-                            <ToolBarTray HorizontalAlignment="Stretch" Background="#FF97999B" >
-                                <ToolBar HorizontalAlignment="Left">
-                                    <TextBox Text="{Binding EmailUser}" Width="250"/>
-                                    <Separator/>
-                                    <Button Content="Применить" x:Name="ApplyBtn"/>
-                                    <Separator/>
-                                    <Button Content="Редактировать" x:Name="EditBtn"/>
-                                    <Separator/>
-                                    <Button Content="Удалить" x:Name="DeleteBtn"/>
+                        <StackPanel Grid.Row="0" x:Name="SelectUserPanel">
+                            <ToolBarTray HorizontalAlignment="Stretch" Height="70" Background="#FF97999B" >
+                                <ToolBar >
+                                    <ComboBox x:Name="boxUserSender" Width="250" ItemsSource="{Binding}" DisplayMemberPath="Key" SelectedValuePath="Value" SelectedIndex="0" />
+                                    <Button x:Name="btnAddSender" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="16"
+                                            ToolTip="Добавить">
+                                        <Image Source="Resourse/Images/Add.png" HorizontalAlignment="Right" />
+                                    </Button>
+                                    <Button x:Name="btnEditSender" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="16" 
+                                            Height="25" ToolTip="Редактировать">
+                                        <Image Source="Resourse/Images/Edit.png"/>
+                                    </Button>
+                                    <Button x:Name="btnDeleteSender" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="16" 
+                                            Height="25" ToolTip="Удалить">
+                                        <Image Source="Resourse/Images/Delete.png" HorizontalAlignment="Right"/>
+                                    </Button>
                                 </ToolBar>
-                                <ToolBar HorizontalAlignment="Right">
-                                    <TextBlock Text="Планировщик" Width="100" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
-                                    <Button Content="Перейти"/>
-                                </ToolBar>
-                            </ToolBarTray>
-                            <ToolBarTray HorizontalAlignment="Stretch" Background="#FF97999B">
-                                <ToolBar HorizontalAlignment="Left">
+                                <ToolBar>
                                     <ComboBox Text="Выбор smtp-сервера" Width="250" ></ComboBox>
                                     <Separator/>
                                     <Button Content="Добавить"/>
@@ -62,42 +58,63 @@
                                     <Separator/>
                                     <Button Content="Удалить"/>
                                 </ToolBar>
-                                <ToolBar HorizontalAlignment="Left">
-                                    <Button Content="Список адресатов"></Button>
+                                <ToolBar>
+                                    <TextBlock Text="Планировщик" Width="100" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                                    <Button Content="Перейти"/>
+                                </ToolBar>
+                                <ToolBar>
+                                    <ComboBox x:Name="boxAddressees" ItemsSource="{Binding}" DisplayMemberPath="Name" SelectedValuePath="Id" SelectedIndex="0" >
+                                    </ComboBox>
                                     <Separator/>
-                                        <Button Content="Добавить"/>
-                                        <Separator/>
-                                        <Button Content="Редактировать"/>
-                                        <Separator/>
-                                        <Button Content="Удалить"/>
+                                    <Button Content="Добавить"/>
+                                    <Separator/>
+                                    <Button Content="Редактировать"/>
+                                    <Separator/>
+                                    <Button Content="Удалить"/>
                                 </ToolBar>
                             </ToolBarTray>
                         </StackPanel>
-                        <DockPanel Grid.Row="1" LastChildFill="True" >
-                            <TextBox DockPanel.Dock="Top" Height="25" Width="240" HorizontalAlignment="Left" Margin="0,0,0,5" ></TextBox>
-                            <TextBox VerticalScrollBarVisibility="Visible" TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True" 
-                             SpellCheck.IsEnabled="True" Language="ru-ru" Height="Auto" />
+                        <DockPanel Grid.Row="1" LastChildFill="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinHeight="280">
+                            <StackPanel DockPanel.Dock="Top" HorizontalAlignment="Left">
+                                <Label Content="Тема письма" />
+                                <TextBox Height="25" Width="350"/>
+                                <Button x:Name="btnSendderNow" Height="25" Width="245" >
+                                    <Button.Content>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Image Source="Resourse/Images/Now.png" Height="16" />
+                                            <TextBlock Margin="3,0,0,0" Text="Отправить немедленно" VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                    </Button.Content>
+                                </Button>
+                            </StackPanel>
+                            <TextBox DockPanel.Dock="Bottom" VerticalScrollBarVisibility="Visible" TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True" 
+                             SpellCheck.IsEnabled="True" Language="ru-ru"/>
                         </DockPanel>
-
                     </Grid>
                 </TabItem.Content>
             </TabItem>
             <TabItem Header="Планировщик" HorizontalAlignment="Right">
                 <TabItem.Content>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="180"/>
-                            <ColumnDefinition Width="2*"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="175"/>
-                            <RowDefinition Height="70"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        <Calendar Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Top" ></Calendar>
-                        <Button Content="Применить" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom"></Button>
-                        <ListBox Grid.Column="1" Grid.RowSpan="3"></ListBox>
-                    </Grid>
+                    <StackPanel HorizontalAlignment="Left" Width="250">
+                        <Calendar SelectionMode="MultipleRange" HorizontalAlignment="Left" />
+                        <xctk:TimePicker Margin="2" />
+                        <Button x:Name="btnSendSchedule" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Width="245" Margin="2">
+                            <Button.Content>
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="Resourse/Images/Schedule.png" Height="16" />
+                                    <TextBlock Margin="3,0,0,0" Text="Отправить запланированно" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </Button.Content>
+                        </Button>
+                        <Button x:Name="btnSendNow" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Width="245" Margin="2">
+                            <Button.Content>
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="Resourse/Images/Now.png" Height="16" />
+                                    <TextBlock Margin="3,0,0,0" Text="Отправить немедленно" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </Button.Content>
+                        </Button>
+                    </StackPanel>
                 </TabItem.Content>
             </TabItem>
             <TabItem Header="Редактрор писем">
@@ -113,16 +130,16 @@
                     </ToolBar>
                     <TextBox  Height="25" Width="240" HorizontalAlignment="Left" Margin="0,0,5,5" ></TextBox>
                     <TextBox VerticalScrollBarVisibility="Visible" TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True" 
-                             SpellCheck.IsEnabled="True" Language="ru-ru" Height="273"/>
+                             SpellCheck.IsEnabled="True" Language="ru-ru"/>
                 </StackPanel>
             </TabItem>
             <TabItem Header="Статистика" Loaded ="StatisticsLoaded">
                 <ListView x:Name="StatList" ItemsSource="{Binding}">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="Адрес почты" Width="300"  DisplayMemberBinding="{Binding Email}"/>
-                            <GridViewColumn Header="Результат" Width="100"  DisplayMemberBinding="{Binding Status}"/>
-                            <GridViewColumn Header="Время" Width="150"  DisplayMemberBinding="{Binding Date}"/>
+                            <GridViewColumn Header="Адрес почты" Width="300"  DisplayMemberBinding="{Binding Value}"/>
+                            <GridViewColumn Header="Результат" Width="100"  DisplayMemberBinding="{Binding Id}"/>
+                            <GridViewColumn Header="Время" Width="150"  DisplayMemberBinding="{Binding Name}"/>
                         </GridView>
                     </ListView.View>
                 </ListView>

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WpfMailSender.Test.Models
+namespace WpfMailSender.Implementation.Models
 {
    public class StatusMessadge
     {
