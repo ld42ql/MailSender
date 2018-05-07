@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfMailSender", "WpfMailSen
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PasswordDLL", "PasswordDLL\PasswordDLL.csproj", "{8AF5268B-F176-48C0-B0B0-70622E6EC3F3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TabSwitcher", "TabSwitcher\TabSwitcher.csproj", "{EAC3BC61-5E79-4752-90F4-EF5956A49543}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{8AF5268B-F176-48C0-B0B0-70622E6EC3F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8AF5268B-F176-48C0-B0B0-70622E6EC3F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8AF5268B-F176-48C0-B0B0-70622E6EC3F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EAC3BC61-5E79-4752-90F4-EF5956A49543}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EAC3BC61-5E79-4752-90F4-EF5956A49543}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EAC3BC61-5E79-4752-90F4-EF5956A49543}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EAC3BC61-5E79-4752-90F4-EF5956A49543}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

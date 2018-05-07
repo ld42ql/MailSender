@@ -177,6 +177,10 @@
       <Project>{8af5268b-f176-48c0-b0b0-70622e6ec3f3}</Project>
       <Name>PasswordDLL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TabSwitcher\TabSwitcher.csproj">
+      <Project>{EAC3BC61-5E79-4752-90F4-EF5956A49543}</Project>
+      <Name>TabSwitcher</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="SQL\SQLQuery\SQLQueryTableEmails.sql" />

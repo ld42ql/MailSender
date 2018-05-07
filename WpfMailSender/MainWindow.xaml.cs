@@ -37,8 +37,19 @@ namespace WpfMailSender
             btnSendderNow.Click +=
                 delegate
                 {
-                    emailSend = new EmailSendServiceClass(boxUserSender.Text, boxUserSender.SelectedValue.ToString());
-                    emailSend.SendMails(db.Emails);
+                    ActionSendMail();
+                };
+
+            btnSendNow.Click +=
+                delegate
+                {
+                    ActionSendMail();
+                };
+
+            btnSendSchedule.Click +=
+                delegate
+                {
+                    ActionSendMailSheduler();
                 };
 
             btnEditSender.Click +=
@@ -54,7 +65,32 @@ namespace WpfMailSender
                 };
         }
 
+        private void ActionSendMail()
+        {
+            emailSend = new EmailSendServiceClass(boxUserSender.Text, boxUserSender.SelectedValue.ToString());
+            emailSend.SendMails(db.Emails);
+        }
 
+        private void ActionSendMailSheduler()
+        {
+            SchedulerClass sc = new SchedulerClass();
+            TimeSpan tsSendTime = sc.GetSendTime(StrTimePicker.Text);
+            if (tsSendTime == new TimeSpan())
+            {
+                MessageBox.Show("Некорректный формат даты");
+                return;
+            }
+            DateTime dtSendDateTime = (StrCalendar.SelectedDate ?? DateTime.Today).Add(tsSendTime);
+
+            if (dtSendDateTime < DateTime.Now)
+            {
+                MessageBox.Show("Дата и время отправки писем не могут быть раньше, чем настоящее время");
+            return;
+            }
+
+            ActionSendMail();
+
+        }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
