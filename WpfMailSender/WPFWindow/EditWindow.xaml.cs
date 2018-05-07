@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WpfMailSender.Implementation.Models;
 
 namespace WpfMailSender.WPFWindow
 {
@@ -19,9 +20,16 @@ namespace WpfMailSender.WPFWindow
     /// </summary>
     public partial class EditWindow : Window
     {
-        public EditWindow()
+        public EditWindow(UsersData users)
         {
             InitializeComponent();
+
+            this.DataContext = users;
+
+            ApplyBtn.Click += delegate
+            {
+                this.Close();
+            };
         }
     }
 }

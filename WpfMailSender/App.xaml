@@ -6,9 +6,6 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Themes/Styles/Core.xaml"/>
-                <ResourceDictionary Source="Themes/Styles/Brushes.xaml"/>
-                <ResourceDictionary Source="Themes/Styles/Icons.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

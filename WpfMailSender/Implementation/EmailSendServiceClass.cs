@@ -5,7 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net;
 using System.Net.Mail;
+using WpfMailSender.Implementation.Models;
+using System.Collections.ObjectModel;
 using WpfMailSender.Test.Models;
+using WpfMailSender.SQL;
+using System.Windows;
+using PasswordDLL;
 
 namespace WpfMailSender
 {
@@ -14,32 +19,52 @@ namespace WpfMailSender
     /// </summary>
     public class EmailSendServiceClass
     {
+        #region vars
+        private readonly string strLogin; 
+        private readonly string strPassword; 
+        private readonly string strSmtp = "smtp.yandex.ru"; 
+        private readonly int iSmtpPort = 25; 
+        private string strBody = "Привет. Тест!!!"; 
+        private string strSubject = "Тест"; 
+        #endregion
 
-        public string SendMessadge(UsersData user, List<string> listStrMails, TextMail text)
+
+        public EmailSendServiceClass(string login, string password)
         {
-            foreach (var item in listStrMails)
+            this.strLogin = login;
+            this.strPassword = Cryptographer.GetCodPassword(password);
+        }
+
+        private void SendMail(string mail, string name) 
+        {
+            using (MailMessage mm = new MailMessage(strLogin, mail))
             {
-                using (MailMessage mailMessage = new MailMessage(user.EmailUser, item))
+                mm.Subject = this.strSubject;
+                mm.Body = this.strBody;
+                mm.IsBodyHtml = false;
+                SmtpClient sc = new SmtpClient(this.strSmtp, this.iSmtpPort)
                 {
-                    mailMessage.Subject = text.Subject;
-                    mailMessage.Body = text.Body;
-                    mailMessage.IsBodyHtml = false;
-                    using (SmtpClient sc = new SmtpClient(user.SmtpAddres, user.SmtpPort))
-                    {
-                        sc.EnableSsl = true;
-                        sc.Credentials = new NetworkCredential(user.EmailUser, user.PasswordUser);
-                        try
-                        {
-                            sc.Send(mailMessage);
-                        }
-                        catch
-                        {
-                            return "Произошла ошибка";
-                        }
-                    }
+                    EnableSsl = true,
+                    DeliveryMethod = SmtpDeliveryMethod.Network,
+                    UseDefaultCredentials = false,
+                    Credentials = new NetworkCredential(this.strLogin, this.strPassword)
+                };
+                try
+                {
+                    sc.Send(mm);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Невозможно отправить письмо {ex.Message}");
                 }
             }
-            return "Сообщение отправленно";
+        }
+        public void SendMails(IQueryable<Email> emails)
+        {
+            foreach (var email in emails)
+            {
+                SendMail(email.Value, email.Name);
+            }
         }
 
     }
