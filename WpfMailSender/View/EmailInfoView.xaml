@@ -7,7 +7,6 @@
              xmlns:mvvm="http://www.galasoft.ch/mvvmlight"
              xmlns:ignore="http://www.ignore.com"
              mc:Ignorable="d ignore"
-             mc:Ignorable="d" 
             DataContext="{Binding Main, Source={StaticResource Locator}}" Height="Auto" Width="Auto">
     <Grid>
         <Grid.RowDefinitions>
@@ -26,11 +25,12 @@
         <Button x:Name="btnloadallemails" Content="Отобразить данные"
                 Grid.Row="3"
                 FontWeight="Bold"
-                Width="140"
+                Width="180"
                 Command="{Binding ReadAllCommand}"/>
         <DataGrid x:Name="dgEmails" Grid.Row="2" ItemsSource="{Binding Emails}"
                   ColumnWidth="*" Margin="0,10,0,28" RenderTransformOrigin="0.5,0.5"
-                  IsReadOnly="True" >
+                  IsReadOnly="True" Width="600" VerticalScrollBarVisibility="Visible" 
+                  Height="100">
         </DataGrid>
         <TextBlock HorizontalAlignment="Left" Margin="10,7,0,0" Grid.Row="1"
                    TextWrapping="Wrap" Text="Поиск по имени:" VerticalAlignment="Top"

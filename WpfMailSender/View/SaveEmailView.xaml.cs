@@ -10,26 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
-using WpfMailSender.Implementation.Models;
 
-namespace WpfMailSender.WPFWindow
+namespace WpfMailSender.View
 {
     /// <summary>
-    /// Interaction logic for EditWindow.xaml
+    /// Interaction logic for SaveEmailView.xaml
     /// </summary>
-    public partial class EditWindow : Window
+    public partial class SaveEmailView : UserControl
     {
-        public EditWindow(UsersData users)
+        public SaveEmailView()
         {
             InitializeComponent();
-
-            this.DataContext = users;
-
-            ApplyBtn.Click += delegate
-            {
-                this.Close();
-            };
         }
     }
 }

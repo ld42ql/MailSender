@@ -7,5 +7,6 @@ namespace WpfMailSender.Implementation.Interface
     {
         ObservableCollection<Email> GetEmails();
 
+        int CreateEmail(Email email);
     }
 }

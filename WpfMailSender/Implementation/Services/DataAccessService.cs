@@ -11,7 +11,7 @@ namespace WpfMailSender.Services
 {
     class DataAccessService : IDataAccessService
     {
-        private EmailsDataContext context;
+        private readonly EmailsDataContext context;
 
         public DataAccessService()
         {
@@ -20,13 +20,20 @@ namespace WpfMailSender.Services
 
         public ObservableCollection<Email> GetEmails()
         {
-            ObservableCollection<Email> Emails = new ObservableCollection<Email>();
-
-            foreach (var item in context.Emails)
+            var emails = new ObservableCollection<Email>();
+            foreach (var item in this.context.Emails)
             {
-                Emails.Add(item);
+                emails.Add(item);
             }
-            return Emails;
+
+            return emails;
+        }
+
+        public int CreateEmail(Email email)
+        {
+            this.context.Emails.InsertOnSubmit(email);
+            this.context.SubmitChanges();
+            return email.Id;
         }
     }
 }
