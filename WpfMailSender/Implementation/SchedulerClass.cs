@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Windows;
 using System.Windows.Threading;
-using WpfMailSender.SQL;
+using WpfMailSender.Implementation.SQL;
 
 namespace WpfMailSender
 {

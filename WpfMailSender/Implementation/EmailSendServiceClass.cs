@@ -1,16 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Net;
 using System.Net.Mail;
-using WpfMailSender.Implementation.Models;
-using System.Collections.ObjectModel;
-using WpfMailSender.Test.Models;
-using WpfMailSender.SQL;
 using System.Windows;
 using PasswordDLL;
+using WpfMailSender.Implementation.SQL;
 
 namespace WpfMailSender
 {

@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WpfMailSender.Implementation.Models;
-using WpfMailSender.SQL;
+using WpfMailSender.Implementation.SQL;
 using WpfMailSender.WPFWindow;
 
 namespace WpfMailSender

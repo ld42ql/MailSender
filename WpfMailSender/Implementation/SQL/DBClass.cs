@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using WpfMailSender.SQL;
+using WpfMailSender.Implementation.SQL;
 
 namespace WpfMailSender
 {

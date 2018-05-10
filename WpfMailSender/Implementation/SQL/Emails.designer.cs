@@ -9,7 +9,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WpfMailSender.SQL
+namespace WpfMailSender.Implementation.SQL
 {
 	using System.Data.Linq;
 	using System.Data.Linq.Mapping;
