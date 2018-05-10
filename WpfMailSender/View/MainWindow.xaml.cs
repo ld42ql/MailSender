@@ -25,6 +25,7 @@ namespace WpfMailSender.View
     public partial class MainWindow : Window
     {
         private readonly ViewModelLocator locator;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -41,6 +42,7 @@ namespace WpfMailSender.View
 
             locator = (ViewModelLocator)FindResource("Locator");
 
+            #region Действия кнопок
             btnSendAtOnce.Click += delegate
             {
                 SendAtOnce();
@@ -56,8 +58,13 @@ namespace WpfMailSender.View
                 SendEmail();
             };
 
+            winClose.Click +=
+                delegate
+                {
+                    this.Close();
+                };
+            #endregion
         }
-
 
         private void Send()
         {
@@ -80,7 +87,6 @@ namespace WpfMailSender.View
 
             sc.SendEmails(dtSendDateTime, emailSender, locator.Main.Emails);
         }
-
 
         private void SendAtOnce()
         {

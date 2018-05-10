@@ -25,6 +25,7 @@ namespace WpfMailSender.ViewModel
         private ObservableCollection<Email> emails;
         private IDataAccessService serviceProxy;
         private Email emailInfo;
+        private string name;
 
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
@@ -40,6 +41,15 @@ namespace WpfMailSender.ViewModel
 
         public RelayCommand ReadAllCommand { get; set; }
         public RelayCommand<Email> SaveCommand { get; set; }
+        public string Name
+        {
+            set
+            {
+                this.name = value;
+                RaisePropertyChanged(nameof(Name));
+
+            }
+        }
 
         public ObservableCollection<Email> Emails
         {
@@ -65,9 +75,22 @@ namespace WpfMailSender.ViewModel
         private void GetEmails()
         {
             Emails.Clear();
-            foreach (var item in this.serviceProxy.GetEmails())
+            if (this.name != null && this.name != "")
             {
-                Emails.Add(item);
+                foreach (var item in this.serviceProxy.GetEmails())
+                {
+                    if (item.Name == this.name)
+                    {
+                        Emails.Add(item);
+                    }
+                }
+            }
+            else
+            {
+                foreach (var item in this.serviceProxy.GetEmails())
+                {
+                        Emails.Add(item);
+                }
             }
         }
 
