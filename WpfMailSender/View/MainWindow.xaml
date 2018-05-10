@@ -6,9 +6,26 @@
         xmlns:views="clr-namespace:WpfMailSender.View"
         x:Class="WpfMailSender.View.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="507.692" Width="792" Icon="/WpfMailSender;component/Resourse/Images/Letter.png" MaxWidth="792" MaxHeight="450" >
-    <Grid Margin="0,0,0,71">
-        <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="338" Margin="10,10,0,0" VerticalAlignment="Top" Width="772">
+        Title="Рассыльщик" MinHeight="280" MinWidth="300" Height="400" Width="820" MaxHeight="400" MaxWidth="820"
+    Icon="/WpfMailSender;component/Resourse/Images/Letter.png" ScrollViewer.VerticalScrollBarVisibility="Disabled"  >
+    <Grid >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="5"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="5"/>
+        </Grid.RowDefinitions>
+        <Menu Grid.Row="0" Grid.ColumnSpan="3">
+            <MenuItem Header="Файл" Height="25" Margin="10,0,0,0">
+                <MenuItem  Header="Закрыть" x:Name="winClose"/>
+            </MenuItem>
+            <MenuItem Header="Помощь" Margin="10,0,0,0"/>
+        </Menu>
+        <TabControl Grid.Column="1" Grid.Row="1" x:Name="tabControl" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top">
             <TabItem Header="Формирование группы рассылки">
                 <Grid Background="#FFE5E5E5" Margin="0,0,0,-30">
                     <Grid.RowDefinitions>
@@ -34,7 +51,6 @@
                                 <Image Source="/WpfMailSender;component/Resourse/Images/Delete.png" HorizontalAlignment="Right" />
                             </Button>
                         </ToolBar>
-
                         <ToolBar x:Name="tbSmtp" HorizontalAlignment="Left" Height="30" VerticalAlignment="Top"
                          Width="Auto" Band="1" BandIndex="0">
                             <Label x:Name="lSmtp" Content="Выбрать smtp-сервер" Height="25" Width="Auto" Foreground="Black"/>
@@ -50,7 +66,6 @@
                                 <Image Source="/WpfMailSender;component/Resourse/Images/Delete.png"/>
                             </Button>
                         </ToolBar>
-
                         <ToolBar x:Name="tbPlanner" HorizontalAlignment="Left" Height="30" VerticalAlignment="Top"
                          Width="230" Band="0" BandIndex="1" >
                             <Label x:Name="lPlanner" Content="Перейти в планировщик" Height="25" Width="Auto" Foreground="Black"/>
@@ -58,7 +73,6 @@
                                 <Image Source="/WpfMailSender;component/Resourse/Images/Calendary.png"/>
                             </Button>
                         </ToolBar>
-
                         <ToolBar x:Name="tbAddressee" HorizontalAlignment="Left" Height="30" VerticalAlignment="Top"
                          Width="230" Band="1" BandIndex="1" >
                             <Label x:Name="lAddressee" Content="Список адресатов" Height="25" Width="Auto"/>
@@ -72,14 +86,12 @@
                                 <Image Source="/WpfMailSender;component/Resourse/Images/Delete.png"/>
                             </Button>
                         </ToolBar>
-
                     </ToolBarTray>
                     <views:EmailInfoView x:Name="emailInfo" VerticalAlignment= "Stretch"
                                          HorizontalAlignment="Center" Grid.ColumnSpan="1" Margin="150,70,0,81" Grid.RowSpan="2" Width="616" />
                     <views:SaveEmailView HorizontalAlignment="Left" Height="178" Margin="0,65,0,0" VerticalAlignment="Top" Width="124" Grid.RowSpan="2"/>
                 </Grid>
             </TabItem>
-
             <TabItem x:Name="tabPlanner" Header="Планировщик">
                 <ToolBarPanel >
                     <Calendar x:Name="cldSchedulDateTimes" Margin="14,0,558,0" SelectionMode="MultipleRange"/>
@@ -98,13 +110,11 @@
                     </Button>
                 </ToolBarPanel>
             </TabItem>
-
             <TabItem Header="Редактор писем" >
                 <ToolBarPanel >
                     <RichTextBox Height="174" Margin="0,0,1,1"/>
                 </ToolBarPanel>
             </TabItem>
-
             <TabItem Header="Статистика" />
         </TabControl>
     </Grid>
