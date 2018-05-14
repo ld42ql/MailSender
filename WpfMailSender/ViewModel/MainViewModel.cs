@@ -19,7 +19,7 @@ namespace WpfMailSender.ViewModel
     /// See http://www.galasoft.ch/mvvm
     /// </para>
     /// </summary>
-    public class MainViewModel : ViewModelBase
+    public class MainViewModel : ViewModelBase 
     {
 
         private ObservableCollection<Email> emails;

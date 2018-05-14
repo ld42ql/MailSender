@@ -14,6 +14,7 @@
 
 using CommonServiceLocator;
 using GalaSoft.MvvmLight.Ioc;
+using WpfMailSender.Services;
 
 namespace WpfMailSender.ViewModel
 {
@@ -32,7 +33,10 @@ namespace WpfMailSender.ViewModel
             SimpleIoc.Default.Register<MainViewModel>();
         }
 
-        public MainViewModel Main => ServiceLocator.Current.GetInstance<MainViewModel>();
+        public MainViewModel GetMain()
+        {
+            return ServiceLocator.Current.GetInstance<MainViewModel>();
+        }
 
         public static void Cleanup()
         {

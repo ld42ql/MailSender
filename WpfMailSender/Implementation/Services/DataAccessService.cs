@@ -9,7 +9,7 @@ using WpfMailSender.Implementation.SQL;
 
 namespace WpfMailSender.Services
 {
-    class DataAccessService : IDataAccessService
+    class DataAccessService : IDataAccessService 
     {
         private readonly EmailsDataContext context;
 
