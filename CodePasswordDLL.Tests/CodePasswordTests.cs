@@ -8,7 +8,7 @@ namespace CodePasswordDLL.Tests
     public class CodePasswordTests
     {
         [TestMethod]
-        public void getCodPassword_abc_bcd()
+        public void GetCodPasswordTest()
         {
             // arrange
             string strIn = "abc";
@@ -16,6 +16,20 @@ namespace CodePasswordDLL.Tests
 
             // act
             string strActual = Cryptographer.GetCodPassword(strIn);
+
+            //assert
+            Assert.AreEqual(strExpected, strActual);
+        }
+
+        [TestMethod]
+        public void GetPasswordTest()
+        {
+            // arrange
+            string strIn = "bcd";
+            string strExpected = "abc";
+
+            // act
+            string strActual = Cryptographer.GetPassword(strIn);
 
             //assert
             Assert.AreEqual(strExpected, strActual);
