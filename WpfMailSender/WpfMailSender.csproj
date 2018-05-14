@@ -102,6 +102,7 @@
     </ApplicationDefinition>
     <Compile Include="Implementation\EmailSendServiceClass.cs" />
     <Compile Include="Implementation\Interface\IDataAccessService.cs" />
+    <Compile Include="Implementation\Models\DemoValidator.cs" />
     <Compile Include="Implementation\Models\VariablesClass.cs" />
     <Compile Include="Implementation\SchedulerClass.cs" />
     <Compile Include="Implementation\Services\DataAccessService.cs" />
