@@ -14,6 +14,7 @@
 
 using CommonServiceLocator;
 using GalaSoft.MvvmLight.Ioc;
+using WpfMailSender.Services;
 
 namespace WpfMailSender.ViewModel
 {

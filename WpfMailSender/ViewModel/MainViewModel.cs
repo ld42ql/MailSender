@@ -89,7 +89,7 @@ namespace WpfMailSender.ViewModel
             {
                 foreach (var item in this.serviceProxy.GetEmails())
                 {
-                        Emails.Add(item);
+                    Emails.Add(item);
                 }
             }
         }

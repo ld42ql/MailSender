@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
@@ -10,17 +11,30 @@ namespace WpfMailSender
     /// <summary>
     /// Планировщик
     /// </summary>
-    class SchedulerClass
+  public  class SchedulerClass
     {
         private readonly DispatcherTimer timer = new DispatcherTimer(); // таймер
         private EmailSendServiceClass emailSender; // экземпляр класса отвечающего за отправку писем
         private DateTime dtSend; // дата и время отправки
         private ObservableCollection<Email> emails; // коллекция email'ов адресатов
-                                                     /// <summary>
-                                                     /// Методе который превращаем строку из текстбокса tbTimePicker в TimeSpan
-                                                     /// </summary>
-                                                     /// <param name="strSendTime"></param>
-                                                     /// <returns></returns>
+
+        Dictionary<DateTime, string> dicDates = new Dictionary<DateTime, string>();
+        public Dictionary<DateTime, string> DatesEmailTexts
+        {
+            get => dicDates;
+            set
+            {
+                dicDates = value;
+                dicDates = dicDates.OrderBy(pair => pair.Key).ToDictionary(pair => pair.Key, pair => pair.Value);
+            }
+        }
+
+
+        /// <summary>
+        /// Методе который превращаем строку из текстбокса tbTimePicker в TimeSpan
+        /// </summary>
+        /// <param name="strSendTime"></param>
+        /// <returns></returns>
         public TimeSpan GetSendTime(string strSendTime)
         {
             TimeSpan tsSendTime = new TimeSpan();
