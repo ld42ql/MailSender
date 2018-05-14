@@ -19,7 +19,7 @@ namespace WpfMailSender.ViewModel
     /// See http://www.galasoft.ch/mvvm
     /// </para>
     /// </summary>
-    public class MainViewModel : ViewModelBase 
+    public class MainViewModel : ViewModelBase
     {
 
         private ObservableCollection<Email> emails;
@@ -89,7 +89,7 @@ namespace WpfMailSender.ViewModel
             {
                 foreach (var item in this.serviceProxy.GetEmails())
                 {
-                        Emails.Add(item);
+                    Emails.Add(item);
                 }
             }
         }

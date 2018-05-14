@@ -85,7 +85,7 @@ namespace WpfMailSender.View
             var emailSender = new EmailSendServiceClass(cbSenderSelect.Text,
                 cbSenderSelect.SelectedValue.ToString());
 
-            sc.SendEmails(dtSendDateTime, emailSender, locator.GetMain().Emails);
+            sc.SendEmails(dtSendDateTime, emailSender, locator.Main.Emails);
         }
 
         private void SendAtOnce()
@@ -104,7 +104,7 @@ namespace WpfMailSender.View
             }
             var emailSender = new EmailSendServiceClass(strLogin, strPassword);
 
-            emailSender.SendMails(locator.GetMain().Emails);
+            emailSender.SendMails(locator.Main.Emails);
         }
 
         private void SendEmail()

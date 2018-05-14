@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 using WpfMailSender.Implementation.Interface;
 using WpfMailSender.Implementation.SQL;
 
 namespace WpfMailSender.Services
 {
-    class DataAccessService : IDataAccessService 
+    class DataAccessService : IDataAccessService
     {
         private readonly EmailsDataContext context;
 
